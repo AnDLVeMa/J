@@ -16,7 +16,7 @@ function drawPetal(x, y, radius, color) {
   for (let i = 0; i  <= 100; i++) {
     /* const theta = Math.PI / 2; */
     const theta = Math.PI / 2 + (Math.PI * i) / 100; // Ángulo entre π/2 y 3π/2
-    const r = radius * Math.cos(8*theta);
+    const r = radius * Math.cos(4 * theta) + 1;
     const xc = x + r * Math.cos(theta);
     const yc = y + r * Math.sin(theta);
 
@@ -27,14 +27,6 @@ function drawPetal(x, y, radius, color) {
     }
   }
 
-  /* ctx.arc(xc, yc, radius, Math.PI / 2, Math.PI);
-  ctx.arc(xc2, yc2, radius, Math.PI, Math.PI / 2); */
-
-  /* // Primer arco (parte superior del pétalo)
-  ctx.arc(x, y, radius, Math.PI / 2, (3 * Math.PI) / 2);
-  
-  // Segundo arco (parte inferior del pétalo, desplazado por el offset)
-  ctx.arc(x + offset, y, radius, (3 * Math.PI) / 2, Math.PI / 2); */
   ctx.closePath();
   ctx.strokeStyle = color;
   ctx.fill();
@@ -46,7 +38,7 @@ function drawPetal2(x, y, radius, color) {
 
     for (let i = 0; i  <= 100; i++) {
         const theta = Math.PI / 2 + (Math.PI * i) / 100; // Ángulo entre π/2 y 3π/2
-        const r2 = -1 * (radius * Math.cos(8*theta));
+        const r2 = -1 * (radius * Math.cos(4* theta)) - 1;
         const xc2 = x + r2 * Math.cos(theta);
         const yc2 = y + r2 * Math.sin(theta);
 
@@ -63,6 +55,50 @@ function drawPetal2(x, y, radius, color) {
     ctx.stroke();
 }
 
+function drawPetal3(x, y, radius, color) {
+  ctx.beginPath();
+
+  for (let i = 0; i  <= 100; i++) {
+    const theta = (2 * Math.PI * i) / 100; // Ángulo entre 0 y 2π
+    const r3 = radius * Math.cos(4* theta + 5) - 1;
+    const xc3 = x + r3 * Math.cos(theta);
+    const yc3 = y + r3 * Math.sin(theta);
+
+    if (i === 0) {
+        ctx.moveTo(xc3, yc3);
+    } else {
+        ctx.lineTo(xc3, yc3);
+    }
+  }
+
+  ctx.closePath();
+  ctx.strokeStyle = color;
+  ctx.fill();
+  ctx.stroke();
+}
+
+function drawPetal4(x, y, radius, color) {
+  ctx.beginPath();
+
+  for (let i = 0; i  <= 100; i++) {
+    const theta = (2 * Math.PI * i) / 100; // Ángulo entre 0 y 2π
+    const r4 = -1 * (radius * Math.cos(4* theta + 4)) - 2;
+    const xc4 = x + r4 * Math.cos(theta);
+    const yc4 = y + r4 * Math.sin(theta);
+
+    if (i === 0) {
+        ctx.moveTo(xc4, yc4);
+    } else {
+        ctx.lineTo(xc4, yc4);
+    }
+  }
+
+  ctx.closePath();
+  ctx.strokeStyle = color;
+  ctx.fill();
+  ctx.stroke();
+}
+
 // Dibujar el patrón de pétalos
 function drawFlower() {
   const numPetals = 16;
@@ -70,9 +106,11 @@ function drawFlower() {
     ctx.save();
     ctx.translate(centerX, centerY);
     ctx.rotate((i * 2 * Math.PI) / numPetals);
-    for (let j = 0; j < 18; j++) {
-      drawPetal(0, 0, 175 - j * 6, "#56070C");
-      drawPetal2(0, 0, 175 - j * 6, "#56070C");
+    for (let j = 0; j < 21; j++) {
+      drawPetal(0, 0, 175 - j * 6, "#F9B208");
+      drawPetal2(0, 0, 175 - j * 6, "#F9B208");
+      drawPetal3(0, 0, 175 - j * 6, "#F9B208");
+      drawPetal4(0, 0, 175 - j * 6, "#F9B208");
     }
     ctx.restore();
   }
@@ -90,9 +128,9 @@ function drawGoldenSpiral() {
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(i * goldenAngle);
-    ctx.fillStyle = "#00321F";
+    ctx.fillStyle = "#3E1404";
     ctx.beginPath();
-    ctx.arc(0, 0, 2.5, 0, Math.PI * 2);
+    ctx.arc(0, 0, 3.5, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
